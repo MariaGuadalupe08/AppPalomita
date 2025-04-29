@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+        <!-- Fondo principal -->
+        <color name="background_color">#F8F9FA</color> <!-- Un blanco suave -->
+
+        <!-- Color principal -->
+        <color name="primary_color">#FF6F61</color> <!-- Un rojo coral vibrante -->
+
+        <!-- Texto primario -->
+        <color name="primary_text">#333333</color> <!-- Un gris oscuro -->
+
+        <!-- Texto secundario -->
+        <color name="secondary_text">#666666</color> <!-- Un gris medio -->
+
+        <!-- Botón activo -->
+        <color name="button_active">#FF6F61</color> <!-- Igual al color principal -->
+
+        <!-- Fondo de opciones -->
+        <color name="option_background">#FFFFFF</color> <!-- Blanco puro -->
+
+        <!-- Contornos de opciones -->
+        <color name="option_border">#FF6F61</color> <!-- Igual al color principal -->
+
+
+
+
+</resources>
