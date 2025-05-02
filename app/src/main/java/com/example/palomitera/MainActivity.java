@@ -92,9 +92,30 @@ public class MainActivity extends AppCompatActivity {
                                     JSONObject item = jsonArray.getJSONObject(i);
                                     if (item.has("id_palomitas") && item.has("tamano") && item.has("precio")) {
                                         RadioButton radioButton = new RadioButton(MainActivity.this);
-                                        radioButton.setText(item.getString("tamano"));
+                                        String tamano = item.getString("tamano");
+                                        radioButton.setText(tamano);
                                         radioButton.setTag(item.getInt("id_palomitas") + "," + item.getDouble("precio"));
                                         radioButton.setId(View.generateViewId());
+
+                                        // Asignar imágenes según el tamaño
+                                        String lower = tamano.toLowerCase();
+                                        int iconResId = 0;
+                                        if (lower.contains("chicas")) {
+                                            iconResId = R.drawable.pops; // Imagen para chico
+                                        } else if (lower.contains("medianas")) {
+                                            iconResId = R.drawable.popsmed; // Imagen para mediano
+                                        } else if (lower.contains("grandes")) {
+                                            iconResId = R.drawable.popsgrand; // Imagen para grande
+                                        } else if (lower.contains("jumbo")) {
+                                            iconResId = R.drawable.popsjum; // Imagen para grande
+                                        }
+
+
+                                        if (iconResId != 0) {
+                                            radioButton.setCompoundDrawablesWithIntrinsicBounds(iconResId, 0, 0, 0);
+                                            radioButton.setCompoundDrawablePadding(24); // Ajustar el espacio entre la imagen y el texto
+                                        }
+
                                         radioGroup.addView(radioButton);
                                     }
                                 } catch (JSONException e) {

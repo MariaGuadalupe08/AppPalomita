@@ -3,28 +3,26 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-        <!-- Fondo principal -->
-        <color name="background_color">#F8F9FA</color> <!-- Un blanco suave -->
+    <!-- Colores principales -->
+    <color name="colorPrimary">#FFD700</color> <!-- Un dorado brillante, como el color de las palomitas -->
+    <color name="colorPrimaryDark">#FFB300</color> <!-- Un tono más oscuro de dorado -->
+    <color name="colorAccent">#FFEB3B</color> <!-- Un amarillo suave -->
 
-        <!-- Color principal -->
-        <color name="primary_color">#FF6F61</color> <!-- Un rojo coral vibrante -->
+    <!-- Colores de fondo -->
+    <color name="backgroundColor">#FFF8E1</color> <!-- Un color de fondo suave, beige claro -->
+    <color name="buttonColor">#FF9800</color> <!-- Un naranja cálido para los botones -->
 
-        <!-- Texto primario -->
-        <color name="primary_text">#333333</color> <!-- Un gris oscuro -->
+    <!-- Colores de texto -->
+    <color name="textColorPrimary">#212121</color> <!-- Color oscuro para el texto -->
+    <color name="textColorSecondary">#757575</color> <!-- Un gris para textos secundarios -->
 
-        <!-- Texto secundario -->
-        <color name="secondary_text">#666666</color> <!-- Un gris medio -->
-
-        <!-- Botón activo -->
-        <color name="button_active">#FF6F61</color> <!-- Igual al color principal -->
-
-        <!-- Fondo de opciones -->
-        <color name="option_background">#FFFFFF</color> <!-- Blanco puro -->
-
-        <!-- Contornos de opciones -->
-        <color name="option_border">#FF6F61</color> <!-- Igual al color principal -->
+    <!-- Colores de los iconos de estado -->
+    <color name="iconColor">#FF5722</color> <!-- Color cálido para los iconos -->
 
 
+    <color name="primary">#FFB300</color>         <!-- Amarillo palomitas -->
+    <color name="primaryText">#4E342E</color>     <!-- Marrón oscuro -->
+    <color name="secondaryText">#6D4C41</color>   <!-- Marrón medio -->
 
 
 </resources>

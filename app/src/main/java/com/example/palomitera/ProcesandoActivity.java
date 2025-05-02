@@ -140,20 +140,19 @@ public class ProcesandoActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
-                runOnUiThread(() -> Toast.makeText(ProcesandoActivity.this, "Error al servir el pedido", Toast.LENGTH_SHORT).show());
+                runOnUiThread(() -> Toast.makeText(ProcesandoActivity.this, "Error al actualizar estado", Toast.LENGTH_SHORT).show());
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
                     runOnUiThread(() -> {
-                        Toast.makeText(ProcesandoActivity.this, "Pedido servido correctamente", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProcesandoActivity.this, "¡Pedido servido con éxito!", Toast.LENGTH_SHORT).show();
                         finish();
                     });
                 } else {
-                    runOnUiThread(() -> Toast.makeText(ProcesandoActivity.this, "Error al actualizar pedido", Toast.LENGTH_SHORT).show());
+                    runOnUiThread(() -> Toast.makeText(ProcesandoActivity.this, "Error al servir el pedido", Toast.LENGTH_SHORT).show());
                 }
-                response.close();
             }
         });
     }
