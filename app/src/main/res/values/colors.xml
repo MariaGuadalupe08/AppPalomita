@@ -20,9 +20,17 @@
     <color name="iconColor">#FF5722</color> <!-- Color cálido para los iconos -->
 
 
-    <color name="primary">#FFB300</color>         <!-- Amarillo palomitas -->
+    <color name="primar">#FFB300</color>         <!-- Amarillo palomitas -->
     <color name="primaryText">#4E342E</color>     <!-- Marrón oscuro -->
     <color name="secondaryText">#6D4C41</color>   <!-- Marrón medio -->
+
+    <color name="primary">#D2691E</color> <!-- tono chocolate -->
+    <color name="primary_dark">#8B4513</color> <!-- marrón oscuro -->
+    <color name="button_gold">#FFD54F</color> <!-- dorado claro -->
+    <color name="bg_soft_yellow">#FFF8E1</color> <!-- fondo suave crema -->
+    <color name="button_yellow">#FFBB00</color>
+
+
 
 
 </resources>

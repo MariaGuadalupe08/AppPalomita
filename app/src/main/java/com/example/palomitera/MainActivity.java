@@ -101,19 +101,19 @@ public class MainActivity extends AppCompatActivity {
                                         String lower = tamano.toLowerCase();
                                         int iconResId = 0;
                                         if (lower.contains("chicas")) {
-                                            iconResId = R.drawable.pops; // Imagen para chico
+                                            iconResId = R.drawable.pops;
                                         } else if (lower.contains("medianas")) {
-                                            iconResId = R.drawable.popsmed; // Imagen para mediano
+                                            iconResId = R.drawable.popsmed;
                                         } else if (lower.contains("grandes")) {
-                                            iconResId = R.drawable.popsgrand; // Imagen para grande
+                                            iconResId = R.drawable.popsgrand;
                                         } else if (lower.contains("jumbo")) {
-                                            iconResId = R.drawable.popsjum; // Imagen para grande
+                                            iconResId = R.drawable.popsjum;
                                         }
 
 
                                         if (iconResId != 0) {
                                             radioButton.setCompoundDrawablesWithIntrinsicBounds(iconResId, 0, 0, 0);
-                                            radioButton.setCompoundDrawablePadding(24); // Ajustar el espacio entre la imagen y el texto
+                                            radioButton.setCompoundDrawablePadding(24);
                                         }
 
                                         radioGroup.addView(radioButton);

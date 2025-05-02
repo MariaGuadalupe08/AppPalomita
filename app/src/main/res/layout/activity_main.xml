@@ -3,35 +3,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center">
+    android:padding="24dp"
+    android:gravity="center"
+    android:background="@color/bg_soft_yellow">
 
+    <!-- Encabezado estilizado -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Escoge el tamaño que deseas ordenar"
-        android:textSize="18sp"
-        android:paddingStart="16dp"
-        android:textColor="@color/primary"
-        android:fontFamily="@font/poppins_bold" />
+        android:text="🍿 Escoge el tamaño que deseas ordenar"
+        android:textSize="22sp"
+        android:textColor="@color/primary_dark"
+        android:fontFamily="@font/poppins_bold"
+        android:paddingBottom="20dp"
+        android:letterSpacing="0.02"
+        android:textAlignment="center" />
 
+    <!-- Contenedor de opciones con fondo y sombra -->
     <LinearLayout
         android:id="@+id/radioGroupContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_marginTop="20dp">
-    </LinearLayout>
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_container"
+        android:elevation="6dp"
+        android:padding="16dp" />
 
-    <!-- Botón para continuar -->
+    <!-- Botón redondeado y destacado -->
     <Button
         android:id="@+id/continuarButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Continuar"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:padding="10dp" />
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:fontFamily="@font/poppins_bold"
+        android:backgroundTint="@color/button_gold"
+        android:layout_marginTop="32dp"
+        android:paddingVertical="14dp"
+        android:background="@drawable/rounded_button"
+        android:elevation="4dp" />
 
 </LinearLayout>

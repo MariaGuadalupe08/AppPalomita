@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import com.bumptech.glide.Glide;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import okhttp3.Call;
@@ -30,7 +30,6 @@ public class DetallesActivity extends AppCompatActivity {
     private int idPalomitas;
     private String size;
     private double price;
-    private String imageUrl;
     private OkHttpClient client;
     private TextView sizeTextView, priceTextView;
     private Button ordenarButton;
@@ -46,24 +45,38 @@ public class DetallesActivity extends AppCompatActivity {
         idPalomitas = getIntent().getIntExtra("id_palomitas", -1);
         size = getIntent().getStringExtra("size");
         price = getIntent().getDoubleExtra("price", 0.0);
-        imageUrl = getIntent().getStringExtra("image_url");  // Obtener la URL de la imagen
 
         sizeTextView = findViewById(R.id.sizeTextView);
         priceTextView = findViewById(R.id.priceTextView);
         ordenarButton = findViewById(R.id.ordenarButton);
-        imageView = findViewById(R.id.palomitasImageView); // Referencia a la ImageView
+        imageView = findViewById(R.id.palomitasImageView);
+
+
+        if (size != null) {
+            switch (size.toLowerCase()) {
+                case "pequeño":
+                case "chicas":
+                    imageView.setImageResource(R.drawable.pops);
+                    break;
+                case "medianas":
+                    imageView.setImageResource(R.drawable.popsmed);
+                    break;
+                case "grandes":
+                    imageView.setImageResource(R.drawable.popsgrand);
+                    break;
+                case "jumbo":
+                    imageView.setImageResource(R.drawable.popsjum);
+                    break;
+                default:
+                    imageView.setImageResource(R.drawable.personaje);
+                    break;
+            }
+        }
 
         if (idPalomitas != -1) {
             cargarDetallesPalomitas(idPalomitas);
         } else {
             Toast.makeText(this, "Error al obtener datos de palomitas", Toast.LENGTH_SHORT).show();
-        }
-
-        // Cargar la imagen de las palomitas
-        if (imageUrl != null && !imageUrl.isEmpty()) {
-            Glide.with(this)
-                    .load(imageUrl)  // Usamos Glide para cargar la imagen desde la URL
-                    .into(imageView);
         }
 
         ordenarButton.setOnClickListener(v -> realizarPedido());
