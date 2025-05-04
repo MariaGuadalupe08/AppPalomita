@@ -1,6 +1,5 @@
 package com.example.palomitera;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -11,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
@@ -35,7 +35,8 @@ public class ProcesandoActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView statusTextView;
 
-    private boolean isChecking = true;
+    private boolean mostrarBotonServirMostrado = false;
+    private boolean dialogoMostrado = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +58,6 @@ public class ProcesandoActivity extends AppCompatActivity {
     }
 
     private void verificarEstadoPedido() {
-        if (!isChecking) return;
-
         String url = "https://aimeetyou.pythonanywhere.com/api/v1/pedidos/" + idPedido + "/";
 
         Request request = new Request.Builder()
@@ -70,7 +69,9 @@ public class ProcesandoActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
-                runOnUiThread(() -> Toast.makeText(ProcesandoActivity.this, "Error en la conexión", Toast.LENGTH_SHORT).show());
+                runOnUiThread(() ->
+                        Toast.makeText(ProcesandoActivity.this, "Error en la conexión", Toast.LENGTH_SHORT).show());
+                volverAVerificar(); // <- seguir intentando
             }
 
             @Override
@@ -86,25 +87,39 @@ public class ProcesandoActivity extends AppCompatActivity {
                         Log.d("ProcesandoActivity", "Estado del pedido: " + estadoPedidoId);
 
                         runOnUiThread(() -> {
-                            if (estadoPedidoId == 2) {
+                            if (estadoPedidoId == 2 && !mostrarBotonServirMostrado) {
+                                mostrarBotonServirMostrado = true;
                                 mostrarBotonServir();
-                                isChecking = false;
-                            } else {
+                            } else if (estadoPedidoId == 3 && !dialogoMostrado) {
+                                dialogoMostrado = true;
+                                progressBar.setVisibility(View.GONE);
+                                try {
+                                    String codigo = pedido.getString("codigo_verificacion");
+                                    mostrarDialogoPago(codigo);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            } else if (estadoPedidoId != 3) {
                                 statusTextView.setText("Esperando a que el pedido esté listo...");
-                                handler.postDelayed(() -> verificarEstadoPedido(), 3000); //verifica constantemente el estado del pedido
                             }
                         });
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } finally {
                         response.close();
+                        volverAVerificar(); // <- continuar monitoreando
                     }
                 } else {
                     Log.e("ProcesandoActivity", "Respuesta no exitosa: " + response.code());
                     response.close();
+                    volverAVerificar(); // <- continuar monitoreando
                 }
             }
         });
+    }
+
+    private void volverAVerificar() {
+        handler.postDelayed(this::verificarEstadoPedido, 3000); // <- Verifica cada 3 segundos
     }
 
     private void mostrarBotonServir() {
@@ -140,7 +155,8 @@ public class ProcesandoActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
-                runOnUiThread(() -> Toast.makeText(ProcesandoActivity.this, "Error al actualizar estado", Toast.LENGTH_SHORT).show());
+                runOnUiThread(() ->
+                        Toast.makeText(ProcesandoActivity.this, "Error al actualizar estado", Toast.LENGTH_SHORT).show());
             }
 
             @Override
@@ -151,9 +167,27 @@ public class ProcesandoActivity extends AppCompatActivity {
                         finish();
                     });
                 } else {
-                    runOnUiThread(() -> Toast.makeText(ProcesandoActivity.this, "Error al servir el pedido", Toast.LENGTH_SHORT).show());
+                    runOnUiThread(() ->
+                            Toast.makeText(ProcesandoActivity.this, "Error al servir el pedido", Toast.LENGTH_SHORT).show());
                 }
             }
         });
+    }
+
+    private void mostrarDialogoPago(String codigoVerificacion) {
+        new AlertDialog.Builder(this)
+                .setTitle("¡Pedido listo!")
+                .setMessage("Listo, ahora puedes pagar.")
+                .setPositiveButton("OK", (dialog, which) -> mostrarCodigoVerificacion(codigoVerificacion))
+                .setCancelable(false)
+                .show();
+    }
+
+    private void mostrarCodigoVerificacion(String codigo) {
+        new AlertDialog.Builder(this)
+                .setTitle("Código de verificación")
+                .setMessage("Tu código es: " + codigo)
+                .setPositiveButton("Cerrar", null)
+                .show();
     }
 }
